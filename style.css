@@ -1,0 +1,61 @@
+
+#drop {
+    width: 700px;
+    height: 1000px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+    float: left;
+    text-align: center;
+    font-size: 30px;
+  }
+  #drag{
+      position: relative;
+      left: 100px;
+      float: left;
+      font-size: 30px;
+      text-align: center;
+  }
+  
+  label{
+    margin-left: 90px;
+  }
+  #myDropDown{
+    position: relative;
+    top:20px;
+  }
+  input{
+    font-size: 20px;
+    padding: 5px;
+  }
+  button{
+    font-size: 20px;
+    position: relative;
+    margin-left: 90px;
+  }
+  .dropdown{
+    display: none;
+  }
+  .show{
+    display: block;
+  }
+  
+  .editting {
+    display: block;
+  }
+  
+  .not-editting {
+    display: none;
+  }
+  
+  #input1{
+    position: relative;
+    left: 100px;
+  }
+  
+  
+  #alignEdit{
+    display: inline-block;
+    position: relative;
+    left: 50px;
+  }
+  

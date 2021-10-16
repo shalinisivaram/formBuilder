@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+
+<script>
+const allowDrop = (event) => {
+  event.preventDefault();
+  
+}
+let itemId = 1;
+
+const drag = (event)  => {
+    event.dataTransfer.setData("text", event.target.id);
+    event.effectAllowed = "copyMove"
+}
+const drop = (event) =>  {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copyMove"
+    var id = event.dataTransfer.getData("text")
+    var data = document.getElementById(id).cloneNode('true')
+    data.id = itemId
+    itemId += 1;
+    event.target.appendChild(data);
+    data.childNodes[3].className = "editting"
+}
+
+
+
+const dropDownfunc = (event) => {
+    event.preventDefault()
+    let parentField = event.target.parentNode.parentNode.parentNode  
+    console.log(parentField)
+   if(parentField.childNodes[5] === undefined) {
+     let dropdownDup = document.getElementById('myDropDown').cloneNode('true')
+      dropdownDup.id = parentField.id +'a'
+      parentField.appendChild(dropdownDup)
+      dropdownDup.className = "show"
+    }
+   else{
+     parentField.childNodes[5].className = 'show'
+   }
+
+}
+
+const removefunc = (event) => {
+  event.preventDefault()
+  let parentField = event.target.parentNode.parentNode
+  parentField.childNodes[5].className = 'dropdown'
+}
+let parentID = ''
+let parent=''
+const handleLabelChange = (event) => {
+   parent  = event.target.parentNode.parentNode
+   console.log(parent.childNodes[1].childNodes[10])
+   parentID = parent.id.charAt(0)
+   console.log(parentID)
+   console.log(event.target.value)
+   parentOfparent = parent.parentNode
+
+   if(parentID === parentOfparent.id){
+    parentOfparent.childNodes[1].innerHTML = event.target.value
+   } 
+   
+} 
+
+const handlePlaceholderChange = (event) => {
+   parent  = event.target.parentNode.parentNode
+   parentID = parent.id.charAt(0)
+   console.log(parentID)
+   console.log(event.target.value)
+   parentOfparent = parent.parentNode
+   console.log(parentOfparent.childNodes[3].childNodes[1])
+   if(parentID === parentOfparent.id){
+    parentOfparent.childNodes[3].childNodes[1].placeholder = event.target.value
+   }  
+}
+
+const addStar = (event) => {
+  parent  = event.target.parentNode.parentNode
+  parentID = parent.id.charAt(0)
+  parentOfparent = parent.parentNode
+  if(parentID === parentOfparent.id && parent.childNodes[1].childNodes[10].checked ){
+    parentOfparent.childNodes[1].innerHTML += '*'
+   }
+}
+
+</script>
+</head>
+<body>
+
+<div id="drop" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="hide"> Drop your fields Here </p>
+</div> 
+<br>
+
+<div id="drag1" draggable="true" ondragstart="drag(event)">
+    <label style="font-size: 20px;">Input</label>
+    <div id="input1" class="not-editting">
+      <input id="drag" name="name" placeholder="Input"></input> 
+      <button id="edit" onclick="dropDownfunc(event)"><i class="fa fa-pencil" ></i></button> 
+      <button id="close" onclick="removefunc(event)" style="position: relative; right:90px; font-size: small;">&#10060;</button> 
+      <br/> <br/> 
+</div>
+</div> <br/>
+<div id = 'drag2' draggable="true" ondragstart="drag(event)">
+  <button type="submit"> Button</button>
+</div>
+<div id = 'drag3' draggable="true" ondragstart="drag(event)">
+  <input type="file" placeholder="file upload">
+</div>
+
+    <div id="myDropDown" class="dropdown"> 
+      <div id="alignEdit">
+        <input type="text" name="labelChange" placeholder="label" onchange="handleLabelChange(event)"> <br/>
+        <input type="text" name="placeholderChange" placeholder="placeholder" onchange="handlePlaceholderChange(event)"><br/>
+        <label style="font-size: 20px;">Required</label>
+        <input type="checkbox" id="check" onclick="addStar(event)">
+      <br/> <br/>
+      </div> 
+  </div>
+</body>
+</html>
+
