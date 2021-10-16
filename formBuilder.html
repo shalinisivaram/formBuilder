@@ -12,14 +12,14 @@ const allowDrop = (event) => {
 let itemId = 1;
 
 const drag = (event)  => {
-    event.dataTransfer.setData("text", event.target.id);
+    event.dataTransfer.setData("element", event.target.id);
     event.effectAllowed = "copyMove"
 }
 const drop = (event) =>  {
     event.preventDefault();
     event.dataTransfer.dropEffect = "copyMove"
-    var id = event.dataTransfer.getData("text")
-    var data = document.getElementById(id).cloneNode('true')
+    const id = event.dataTransfer.getData("element")
+    const data = document.getElementById(id).cloneNode('true')
     data.id = itemId
     itemId += 1;
     event.target.appendChild(data);
